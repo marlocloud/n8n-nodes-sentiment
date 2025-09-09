@@ -1,19 +1,24 @@
 {
-  "name": "n8n-nodes-<...>",
-  "version": "0.1.0",
-  "description": "",
+  "name": "@marlo-cloud/n8n-nodes-sentiment",
+  "version": "1.0.1",
+  "description": "n8n community node for Marlo Sentiment Analysis API",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "marlo",
+    "sentiment",
+    "analysis",
+    "ai",
+    "nlp"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://marlo.cloud",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Marlo Team",
+    "email": "support@marlo.cloud"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/marlocloud/n8n-nodes-marlo-sentiment.git"
   },
   "engines": {
     "node": ">=20.15"
@@ -33,12 +38,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/MarloSentimentApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/MarloSentiment/MarloSentiment.node.js"
     ]
   },
   "devDependencies": {
@@ -51,5 +54,8 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

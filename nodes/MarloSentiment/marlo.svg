@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="60" height="60" rx="12" fill="#2E8B57"/>
+  <path d="M15 30C15 21.7157 21.7157 15 30 15C38.2843 15 45 21.7157 45 30C45 38.2843 38.2843 45 30 45C21.7157 45 15 38.2843 15 30Z" fill="#F0F8FF"/>
+  <path d="M22 28C22 24.6863 24.6863 22 28 22C31.3137 22 34 24.6863 34 28V32C34 35.3137 31.3137 38 28 38C24.6863 38 22 35.3137 22 32V28Z" fill="#2E8B57"/>
+  <path d="M26 32C26 29.2386 28.2386 27 31 27C33.7614 27 36 29.2386 36 32C36 34.7614 33.7614 37 31 37C28.2386 37 26 34.7614 26 32Z" fill="#4682B4"/>
+  <text x="30" y="52" text-anchor="middle" fill="#2E8B57" font-family="Arial, sans-serif" font-size="8" font-weight="bold">MARLO</text>
+</svg>

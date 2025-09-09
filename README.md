@@ -1,47 +1,160 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+# n8n-nodes-marlo-sentiment
 
-# n8n-nodes-starter
+This is an n8n community node that integrates with the [Marlo Sentiment Analysis API](https://marlo.cloud) via RapidAPI to perform AI-powered sentiment analysis on text content.
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](https://n8n.io). It includes the node linter and other dependencies.
-
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
-
-If you would like your node to be available on n8n cloud you can also [submit your node for verification](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/).
+![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
 
 ## Prerequisites
 
 You need the following installed on your development machine:
 
 * [git](https://git-scm.com/downloads)
-* Node.js and npm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
+* Node.js and npm. Minimum version Node 20. You can find instructions on how to install both [here](https://nodejs.org/en/download/).
 * Install n8n with:
-  ```
-  npm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+	```bash
+	npm install n8n -g
+	```
 
-## Using this starter
+## Installation
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+### Community Nodes (Recommended)
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm run lint` to check for errors or `npm run lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+For users on n8n v0.187+, your instance owner can install this node from **Settings** > **Community Nodes**.
 
-## More information
+The installation identifier is:
+```
+n8n-nodes-marlo-sentiment
+```
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+### Manual Installation
+
+To install the node locally, you can use n8n's community node installation feature:
+
+```bash
+cd ~/.n8n && npm install n8n-nodes-marlo-sentiment
+```
+
+For Docker users, add the following line before the font installation command in your n8n Dockerfile:
+```dockerfile
+RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-marlo-sentiment
+```
+
+Restart n8n and you should see the **Marlo Sentiment** node available in the nodes panel.
+
+## Configuration
+
+### Credentials
+
+Before using this node, you need to configure your RapidAPI credentials:
+
+1. **Get RapidAPI Access**: Visit the [Marlo Sentiment API on RapidAPI](https://rapidapi.com/marlo-cloud-marlo-cloud-default/api/sentimental-industry-specific-sentiment-analysis)
+2. **Subscribe**: Subscribe to the API plan that fits your needs
+3. **Get API Key**: Copy your RapidAPI key from the dashboard
+4. **Configure in n8n**:
+   - In n8n, create new credentials for "Marlo Sentiment API"
+   - Enter your RapidAPI key
+   - The RapidAPI Host should be: `marlo-sentiment.p.rapidapi.com`
+
+## Operations
+
+### Analyze Sentiment
+
+Analyzes the sentiment of text content and returns:
+
+- **Sentiment**: Overall sentiment classification (positive, negative, neutral)
+- **Confidence**: Confidence score for the sentiment classification (0-1)
+- **Text Length**: Character count of the analyzed text
+- **Industry Context** (optional): Industry-specific sentiment analysis
+- **Raw Scores** (optional): Detailed sentiment scores (positive, negative, neutral, compound)
+
+### Supported Industries
+
+The node supports industry-specific sentiment analysis for:
+
+- Healthcare
+- Technology  
+- Gaming
+- Finance
+- Restaurant
+- Automotive
+- Real Estate
+- Fitness
+- Education
+- Retail
+
+## Usage Examples
+
+### Basic Sentiment Analysis
+
+1. Add the **Marlo Sentiment** node to your workflow
+2. Configure your credentials
+3. Set the **Text** parameter to the content you want to analyze
+4. The node will return sentiment analysis results
+
+### Industry-Specific Analysis
+
+1. Configure the node as above
+2. Set the **Industry** parameter to match your content context
+3. This provides more accurate sentiment analysis for industry-specific language
+
+### Batch Processing
+
+The node can process multiple items in a workflow, making it perfect for:
+- Analyzing customer feedback from surveys
+- Processing social media mentions
+- Evaluating product reviews
+- Monitoring support ticket sentiment
+
+## Node Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| Text | String | Yes | The text content to analyze for sentiment |
+| Industry | Options | No | Industry context for more accurate analysis |
+| Include Raw Scores | Boolean | No | Whether to include detailed sentiment scores in output |
+
+## Output
+
+The node outputs a JSON object with the following structure:
+
+```json
+{
+  "sentiment": "positive",
+  "confidence": 0.85,
+  "text_length": 150,
+  "original_text": "Your analyzed text...",
+  "industry": "technology",
+  "scores": {
+    "positive": 0.8,
+    "negative": 0.1,
+    "neutral": 0.1,
+    "compound": 0.75
+  }
+}
+```
+
+## Error Handling
+
+The node includes comprehensive error handling:
+- **Empty text**: Returns an error if no text is provided
+- **API errors**: Handles RapidAPI rate limits and authentication errors
+- **Network issues**: Gracefully handles connection problems
+- **Continue on fail**: Option to continue workflow execution even if sentiment analysis fails
+
+## Resources
+
+* [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
+* [Marlo Sentiment API Documentation](https://rapidapi.com/marlo-cloud-marlo-cloud-default/api/sentimental-industry-specific-sentiment-analysis)
+* [Marlo Cloud Official Website](https://marlo.cloud)
+
+## Version History
+
+### 1.0.0
+- Initial release
+- Basic sentiment analysis functionality
+- Industry-specific analysis support
+- RapidAPI integration
+- Comprehensive error handling
 
 ## License
 
